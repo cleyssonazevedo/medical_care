@@ -5,6 +5,10 @@
  */
 package com;
 
+import java.io.File;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author cleys
@@ -38,6 +42,9 @@ public class Application extends javax.swing.JFrame {
         btn_novo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Medical Care");
+        setIconImage(getImageIcon());
+        setName("body"); // NOI18N
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -109,6 +116,11 @@ public class Application extends javax.swing.JFrame {
         btn_atualizar.setText("Atualizar");
 
         btn_novo.setText("Novo");
+        btn_novo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                novo(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +148,7 @@ public class Application extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tx_Pesquisa)
-                    .addComponent(btn_Pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(btn_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -156,6 +168,11 @@ public class Application extends javax.swing.JFrame {
     private void pesquisar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pesquisar
         // TODO add your handling code here:
     }//GEN-LAST:event_pesquisar
+
+    private void novo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novo
+        // TODO add your handling code here:
+        this.tx_Pesquisa.setText(null);
+    }//GEN-LAST:event_novo
 
     /**
      * @param args the command line arguments
@@ -190,6 +207,10 @@ public class Application extends javax.swing.JFrame {
                 new Application().setVisible(true);
             }
         });
+    }
+    
+    public Image getImageIcon() {
+        return new ImageIcon(Application.class.getResource("./medical-history.png")).getImage();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
