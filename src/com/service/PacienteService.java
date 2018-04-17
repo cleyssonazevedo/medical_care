@@ -5,6 +5,7 @@
  */
 package com.service;
 
+import com.model.Identificacao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +49,59 @@ public class PacienteService {
                 pacientes.add(paciente);
             }
             
+            result.close();
+            statement.close();
+            con.close();
+            
             return pacientes;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Falha ao tentar conectar com o Banco", "Falha", JOptionPane.ERROR_MESSAGE);
             return null;
+        }
+    }
+
+    public void save(Identificacao iden) throws Exception {
+        try {
+            Connection con = this.getConnection();
+            String sql = "INSERT INTO endereco(logradouro, numero, bairro, cidade, estado, cep) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(0, iden.getEndereco().getLogradouro());
+            statement.setString(1, iden.getEndereco().getNumero());
+            statement.setString(2, iden.getEndereco().getBairro());
+            statement.setString(3, iden.getEndereco().getCidade());
+            statement.setString(4, iden.getEndereco().getEstado());
+            statement.setString(5, iden.getEndereco().getCep());
+            
+            int affect = statement.executeUpdate();
+            if (affect == 0) {
+                throw new Exception("Falha ao gravar dados");
+            }
+            
+            try(ResultSet keys = statement.getGeneratedKeys()) {
+                if(keys.next()) {
+                    Long id = keys.getLong(1);
+                    try {
+                        sql = "INSERT INTO paciente (nome, naturalidade, sexo, cpf, id_endereco) VALUES (?, ?, ?, ?, ?)";
+                        statement = con.prepareStatement(sql);
+                        statement.setString(0, iden.getNome());
+                        statement.setString(1, iden.getNaturalidade());
+                        statement.setString(2, iden.getSexo());
+                        statement.setString(3, iden.getCpf());
+                        statement.setLong(4, id);
+
+                        ResultSet result = statement.executeQuery();
+                        
+                        result.close();
+                        statement.close();
+                        con.close();
+                        JOptionPane.showMessageDialog(null, "Dados Inseridos", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        throw  e;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw e;
         }
     }
 }

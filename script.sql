@@ -15,18 +15,19 @@ CREATE TABLE endereco (
     id          INT PRIMARY KEY AUTO_INCREMENT,
     logradouro  VARCHAR(100) NOT NULL,
     numero      VARCHAR(10),
-    bairro      VARCHAR(100),
-    cidade      VARCHAR(255),
-    estado      CHAR(2)
+    bairro      VARCHAR(100) NOT NULL,
+    cidade      VARCHAR(255) NOT NULL,
+    estado      CHAR(2) NOT NULL,
+    cep         CHAR(9) NOT NULL
 );
 
 ALTER TABLE paciente ADD CONSTRAINT fk_endereco FOREIGN KEY (id_endereco) REFERENCES endereco(id);
 
-INSERT INTO endereco (logradouro, numero, bairro, cidade, estado) VALUES
- ('Rua 1', '123', 'Vila 10', 'São Paulo', 'SP'),
- ('Rua 2', '123', 'Vila 20', 'São Paulo', 'SP'),
- ('Rua 3', '123', 'Vila 30', 'São Paulo', 'SP'),
- ('Rua 4', '123', 'Vila 40', 'São Paulo', 'SP');
+INSERT INTO endereco (logradouro, numero, bairro, cidade, estado, cep) VALUES
+ ('Rua 1', '123', 'Vila 10', 'São Paulo', 'SP', '08552-122'),
+ ('Rua 2', '123', 'Vila 20', 'São Paulo', 'SP', '08552-123'),
+ ('Rua 3', '123', 'Vila 30', 'São Paulo', 'SP', '08552-124'),
+ ('Rua 4', '123', 'Vila 40', 'São Paulo', 'SP', '08552-125');
 
 INSERT INTO paciente (nome, naturalidade, sexo, cpf, id_endereco) VALUES
 ('José', 'Brasileiro', 'Masculino', '123.123.132-12', 1),

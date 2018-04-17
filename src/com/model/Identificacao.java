@@ -14,10 +14,10 @@ public class Identificacao {
     private int id;
     private String nome;
     private String naturalidade;
+    private String sexo;
+    private String cpf;
 
     private Endereco endereco;
-    private Telefone fixo;
-    private Telefone celular;
 
     public Identificacao() {
     }
@@ -27,8 +27,8 @@ public class Identificacao {
         this.nome = builder.nome;
         this.naturalidade = builder.naturalidade;
         this.endereco = builder.endereco;
-        this.fixo = builder.fixo;
-        this.celular = builder.celular;
+        this.sexo = builder.sexo;
+        this.cpf = builder.cpf;
     }
 
     public int getId() {
@@ -63,31 +63,33 @@ public class Identificacao {
         this.endereco = endereco;
     }
 
-    public Telefone getFixo() {
-        return fixo;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setFixo(Telefone fixo) {
-        this.fixo = fixo;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public Telefone getCelular() {
-        return celular;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCelular(Telefone celular) {
-        this.celular = celular;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
+    
+    
 
     public static class Builder {
 
         private int id;
         private String nome;
         private String naturalidade;
+        private String sexo;
+        private String cpf;
 
         private Endereco endereco;
-        private Telefone fixo;
-        private Telefone celular;
 
         public Builder setId(int id) {
             this.id = id;
@@ -109,13 +111,13 @@ public class Identificacao {
             return this;
         }
 
-        public Builder setFixo(Telefone fixo) {
-            this.fixo = fixo;
+        public Builder setSexo(String sexo) {
+            this.sexo = sexo;
             return this;
         }
         
-        public Builder setCelular(Telefone celular) {
-            this.celular = celular;
+        public Builder setCPF(String cpf) {
+            this.cpf = cpf;
             return this;
         }
 

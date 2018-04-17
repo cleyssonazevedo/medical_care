@@ -37,6 +37,7 @@ public class Application extends javax.swing.JFrame {
      */
     public Application() {
         initComponents();
+        this.sexo = this.rd_nao_informado.getText();
     }
 
     /**
@@ -84,6 +85,8 @@ public class Application extends javax.swing.JFrame {
                 rd_outro = new javax.swing.JRadioButton();
                 jLabel12 = new javax.swing.JLabel();
                 jLabel13 = new javax.swing.JLabel();
+                jLabel14 = new javax.swing.JLabel();
+                tx_bairro = new javax.swing.JTextField();
                 pn_ficha = new javax.swing.JPanel();
                 jScrollPane1 = new javax.swing.JScrollPane();
                 tb_ficha_clinica = new javax.swing.JTable();
@@ -169,7 +172,7 @@ public class Application extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -263,6 +266,11 @@ public class Application extends javax.swing.JFrame {
 
         rd_nao_informado.setSelected(true);
         rd_nao_informado.setText("Não Informado");
+        rd_nao_informado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rd_nao_informadoActionPerformed(evt);
+            }
+        });
 
         rd_masculino.setText("Masculino");
         rd_masculino.addActionListener(new java.awt.event.ActionListener() {
@@ -272,12 +280,24 @@ public class Application extends javax.swing.JFrame {
         });
 
         rd_feminino.setText("Feminino");
+        rd_feminino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rd_femininoActionPerformed(evt);
+            }
+        });
 
         rd_outro.setText("Outro");
+        rd_outro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rd_outroActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Sexo");
 
         jLabel13.setText("Naturalidade");
+
+        jLabel14.setText("Bairro");
 
         javax.swing.GroupLayout pn_identificacaoLayout = new javax.swing.GroupLayout(pn_identificacao);
         pn_identificacao.setLayout(pn_identificacaoLayout);
@@ -299,16 +319,22 @@ public class Application extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_identificacaoLayout.createSequentialGroup()
                         .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tx_cidade)
                             .addGroup(pn_identificacaoLayout.createSequentialGroup()
                                 .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel9)
                                     .addComponent(tx_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_identificacaoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(tx_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(tx_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(cb_estados, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -329,7 +355,7 @@ public class Application extends javax.swing.JFrame {
                                 .addComponent(jLabel13)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_identificacaoLayout.createSequentialGroup()
-                        .addComponent(tx_cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                        .addComponent(tx_cpf)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tx_naturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -364,9 +390,9 @@ public class Application extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tx_cpf)
+                    .addComponent(tx_naturalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rd_nao_informado)
-                        .addComponent(tx_naturalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addComponent(rd_feminino)
                         .addComponent(rd_masculino)
                         .addComponent(rd_outro)))
@@ -387,14 +413,21 @@ public class Application extends javax.swing.JFrame {
                     .addComponent(tx_logradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tx_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cb_estados, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(tx_cidade))
-                .addGap(0, 0, 0))
+                .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_identificacaoLayout.createSequentialGroup()
+                        .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pn_identificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_estados, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                            .addComponent(tx_cidade))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pn_identificacaoLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tx_bairro)))
+                .addContainerGap())
         );
 
         _tab.addTab("Identificação", pn_identificacao);
@@ -440,7 +473,7 @@ public class Application extends javax.swing.JFrame {
             pn_fichaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_fichaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pn_fichaLayout.setVerticalGroup(
@@ -493,7 +526,7 @@ public class Application extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -546,7 +579,7 @@ public class Application extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -621,8 +654,25 @@ public class Application extends javax.swing.JFrame {
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
         // TODO add your handling code here:
-        
-        this.btn_salvar.setText("Salvar");
+        Identificacao iden = new Identificacao.Builder()
+             .setNome(tx_nome.getText())
+             .setNaturalidade(tx_naturalidade.getText())
+             .setCPF(tx_cpf.getText())
+             .setSexo(this.sexo)
+              .setEndereco(new Endereco.Builder()
+                      .setLogradouro(tx_logradouro.getText())
+                      .setNumero(tx_numero.getText())
+                      .setBairro(tx_bairro.getText())
+                      .setCidade(tx_cidade.getText())
+                      .setEstado(cb_estados.getSelectedItem().toString())
+                      .build()
+              )
+              .build();
+        try {
+            this.service.save(iden);
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -644,11 +694,40 @@ public class Application extends javax.swing.JFrame {
         this.rd_feminino.setSelected(false);
         this.rd_outro.setSelected(false);
         this.rd_nao_informado.setSelected(false);
+        this.sexo = this.rd_masculino.getText();
     }//GEN-LAST:event_rd_masculinoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void rd_femininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_femininoActionPerformed
+        // TODO add your handling code here:
+        this.rd_masculino.setSelected(false);
+        this.rd_feminino.setSelected(true);
+        this.rd_outro.setSelected(false);
+        this.rd_nao_informado.setSelected(false);
+        this.sexo = this.rd_feminino.getText();
+    }//GEN-LAST:event_rd_femininoActionPerformed
+
+    private void rd_outroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_outroActionPerformed
+        // TODO add your handling code here:
+        
+        this.rd_masculino.setSelected(false);
+        this.rd_feminino.setSelected(false);
+        this.rd_outro.setSelected(true);
+        this.rd_nao_informado.setSelected(false);
+        this.sexo = this.rd_outro.getText();
+    }//GEN-LAST:event_rd_outroActionPerformed
+
+    private void rd_nao_informadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_nao_informadoActionPerformed
+        // TODO add your handling code here:        
+        this.rd_masculino.setSelected(false);
+        this.rd_feminino.setSelected(false);
+        this.rd_outro.setSelected(false);
+        this.rd_nao_informado.setSelected(false);
+        this.sexo = this.rd_nao_informado.getText();
+    }//GEN-LAST:event_rd_nao_informadoActionPerformed
     
     /**
      * @param args the command line arguments
@@ -683,6 +762,7 @@ public class Application extends javax.swing.JFrame {
         });
     }
     
+    private String sexo;
     public Image getImageIcon() {
         return new ImageIcon(Application.class.getResource("./medical-history.png")).getImage();
     }
@@ -701,6 +781,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -729,6 +810,7 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JTable tb_exames;
     private javax.swing.JTable tb_ficha_clinica;
     private javax.swing.JTable tb_paciente;
+    private javax.swing.JTextField tx_bairro;
     private javax.swing.JFormattedTextField tx_cep;
     private javax.swing.JTextField tx_cidade;
     private javax.swing.JFormattedTextField tx_cpf;
