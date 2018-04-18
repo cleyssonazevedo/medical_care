@@ -5,19 +5,22 @@
  */
 package com.model;
 
+import java.util.List;
+
 /**
  *
  * @author cleys
  */
 public class Identificacao {
 
-    private int id;
+    private Long id;
     private String nome;
     private String naturalidade;
     private String sexo;
     private String cpf;
 
     private Endereco endereco;
+    private List<Ficha> ficha;
 
     public Identificacao() {
     }
@@ -31,11 +34,11 @@ public class Identificacao {
         this.cpf = builder.cpf;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,7 +86,7 @@ public class Identificacao {
 
     public static class Builder {
 
-        private int id;
+        private Long id;
         private String nome;
         private String naturalidade;
         private String sexo;
@@ -91,7 +94,7 @@ public class Identificacao {
 
         private Endereco endereco;
 
-        public Builder setId(int id) {
+        public Builder setId(Long id) {
             this.id = id;
             return this;
         }

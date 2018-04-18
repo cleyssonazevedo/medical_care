@@ -8,13 +8,15 @@ package com;
 import com.model.Endereco;
 import com.model.Identificacao;
 import com.model.Paciente;
+import com.model.enums.Estados;
 import com.service.PacienteService;
 import java.awt.Image;
-import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -32,7 +34,12 @@ public class Application extends javax.swing.JFrame {
 	public Application() {
 		initComponents();
 		this.service = new PacienteService();
+		this.AtualizarTabelaPacientes();
 		this.sexo = this.rd_nao_informado.getText();
+		this.cb_estados.setSelectedIndex(24);
+	}
+
+	private void AtualizarTabelaPacientes() {
 		this.tb_paciente.setModel(this.getPacientes());
 	}
 
@@ -43,10 +50,13 @@ public class Application extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
+
+		buttonGroup1 = new javax.swing.ButtonGroup();
 		_tab = new javax.swing.JTabbedPane();
-		jPanel1 = new javax.swing.JPanel();
+		pn_lista_pacientes = new javax.swing.JPanel();
 		tx_pesquisar = new javax.swing.JTextField();
 		jLabel10 = new javax.swing.JLabel();
 		jButton1 = new javax.swing.JButton();
@@ -70,133 +80,139 @@ public class Application extends javax.swing.JFrame {
 		jLabel9 = new javax.swing.JLabel();
 		try {
 			tx_cep = new javax.swing.JFormattedTextField(new MaskFormatter("#####-###"));
-			cb_estados = new javax.swing.JComboBox<String>();
-			tx_cpf = new javax.swing.JFormattedTextField(new MaskFormatter("###.###.###-##"));
-			jLabel11 = new javax.swing.JLabel();
-			rd_nao_informado = new javax.swing.JRadioButton();
-			rd_masculino = new javax.swing.JRadioButton();
-			rd_feminino = new javax.swing.JRadioButton();
-			rd_outro = new javax.swing.JRadioButton();
-			jLabel12 = new javax.swing.JLabel();
-			jLabel13 = new javax.swing.JLabel();
-			jLabel14 = new javax.swing.JLabel();
-			tx_bairro = new javax.swing.JTextField();
-			pn_ficha = new javax.swing.JPanel();
-			jScrollPane1 = new javax.swing.JScrollPane();
-			tb_ficha_clinica = new javax.swing.JTable();
-			jPanel3 = new javax.swing.JPanel();
-			jScrollPane2 = new javax.swing.JScrollPane();
-			tb_exames = new javax.swing.JTable();
-			jPanel4 = new javax.swing.JPanel();
-			jScrollPane3 = new javax.swing.JScrollPane();
-			jTable1 = new javax.swing.JTable();
-			btn_cancelar = new javax.swing.JButton();
-			btn_salvar = new javax.swing.JButton();
-			jMenuBar1 = new javax.swing.JMenuBar();
-			btn_novo = new javax.swing.JMenu();
-			jMenuItem1 = new javax.swing.JMenuItem();
-			btn_sair = new javax.swing.JMenuItem();
-			jMenu2 = new javax.swing.JMenu();
+			cb_estados = new javax.swing.JComboBox<>();
+			try {
+				tx_cpf = new javax.swing.JFormattedTextField(new MaskFormatter("###.###.###-##"));
+				jLabel11 = new javax.swing.JLabel();
+				rd_nao_informado = new javax.swing.JRadioButton();
+				rd_masculino = new javax.swing.JRadioButton();
+				rd_feminino = new javax.swing.JRadioButton();
+				rd_outro = new javax.swing.JRadioButton();
+				jLabel12 = new javax.swing.JLabel();
+				jLabel13 = new javax.swing.JLabel();
+				jLabel14 = new javax.swing.JLabel();
+				tx_bairro = new javax.swing.JTextField();
+				pn_ficha = new javax.swing.JPanel();
+				jScrollPane1 = new javax.swing.JScrollPane();
+				tb_ficha_clinica = new javax.swing.JTable();
+				jPanel3 = new javax.swing.JPanel();
+				jScrollPane2 = new javax.swing.JScrollPane();
+				tb_exames = new javax.swing.JTable();
+				jPanel4 = new javax.swing.JPanel();
+				jScrollPane3 = new javax.swing.JScrollPane();
+				jTable1 = new javax.swing.JTable();
+				btn_cancelar = new javax.swing.JButton();
+				btn_salvar = new javax.swing.JButton();
+				jMenuBar1 = new javax.swing.JMenuBar();
+				btn_novo = new javax.swing.JMenu();
+				jMenuItem1 = new javax.swing.JMenuItem();
+				btn_sair = new javax.swing.JMenuItem();
+				jMenu2 = new javax.swing.JMenu();
 
-			setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-			setTitle("Medical Care");
-			setIconImage(getImageIcon());
-			setName("body"); // NOI18N
-			addWindowListener(new java.awt.event.WindowAdapter() {
-				public void windowOpened(java.awt.event.WindowEvent evt) {
-					formWindowOpened(evt);
-				}
-			});
+				setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+				setTitle("Medical Care");
+				setIconImage(getImageIcon());
+				setName("body"); // NOI18N
+				addWindowListener(new java.awt.event.WindowAdapter() {
+					public void windowOpened(java.awt.event.WindowEvent evt) {
+						formWindowOpened(evt);
+					}
+				});
 
-			_tab.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-			_tab.addChangeListener(new javax.swing.event.ChangeListener() {
-				public void stateChanged(javax.swing.event.ChangeEvent evt) {
-					_tabStateChanged(evt);
-				}
-			});
+				_tab.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-			jLabel10.setText("Pesquisar");
+				jLabel10.setText("Pesquisar");
 
-			jButton1.setText("Pesquisar");
+				jButton1.setText("Pesquisar");
 
-			tb_paciente
-					.setModel(new DefaultTableModel(null, new String[] { new String("Código".getBytes(), Charset.forName("UTF-8")), "Nome", "CPF", "Sexo" }) {
-						Class[] types = new Class[] { java.lang.String.class, java.lang.String.class,
-								java.lang.String.class, java.lang.String.class };
-						boolean[] canEdit = new boolean[] { false, false, false, false };
+				tb_paciente.setModel(new javax.swing.table.DefaultTableModel(
+						new Object[][] { { null, null, null, null }, { null, null, null, null },
+								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null },
+								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null },
+								{ null, null, null, null }, { null, null, null, null } },
+						new String[] { "Código", "Nome", "CPF", "Sexo" }) {
+					Class[] types = new Class[] { java.lang.String.class, java.lang.String.class,
+							java.lang.String.class, java.lang.String.class };
+					boolean[] canEdit = new boolean[] { false, false, false, false };
 
-						public Class getColumnClass(int columnIndex) {
-							return types[columnIndex];
-						}
+					public Class getColumnClass(int columnIndex) {
+						return types[columnIndex];
+					}
 
-						public boolean isCellEditable(int rowIndex, int columnIndex) {
-							return canEdit[columnIndex];
-						}
-					});
-			jScrollPane4.setViewportView(tb_paciente);
-			if (tb_paciente.getColumnModel().getColumnCount() > 0) {
-				tb_paciente.getColumnModel().getColumn(0).setHeaderValue(new String("Código".getBytes(), Charset.forName("UTF-8")));
-				tb_paciente.getColumnModel().getColumn(1).setHeaderValue("Nome");
-				tb_paciente.getColumnModel().getColumn(2).setHeaderValue("CPF");
-				tb_paciente.getColumnModel().getColumn(3).setHeaderValue("Sexo");
+					public boolean isCellEditable(int rowIndex, int columnIndex) {
+						return canEdit[columnIndex];
+					}
+				});
+				tb_paciente.setColumnSelectionAllowed(false);
+				tb_paciente.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent evt) {
+						tb_pacienteMouseClicked(evt);
+					}
+				});
+				jScrollPane4.setViewportView(tb_paciente);
+
+				javax.swing.GroupLayout pn_lista_pacientesLayout = new javax.swing.GroupLayout(pn_lista_pacientes);
+				pn_lista_pacientes.setLayout(pn_lista_pacientesLayout);
+				pn_lista_pacientesLayout.setHorizontalGroup(pn_lista_pacientesLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(pn_lista_pacientesLayout.createSequentialGroup().addContainerGap()
+								.addGroup(pn_lista_pacientesLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1085,
+												Short.MAX_VALUE)
+										.addGroup(pn_lista_pacientesLayout.createSequentialGroup()
+												.addGroup(pn_lista_pacientesLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(pn_lista_pacientesLayout.createSequentialGroup()
+																.addComponent(jLabel10).addGap(0, 0, Short.MAX_VALUE))
+														.addComponent(tx_pesquisar))
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85,
+														javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addContainerGap()));
+				pn_lista_pacientesLayout.setVerticalGroup(
+						pn_lista_pacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(pn_lista_pacientesLayout.createSequentialGroup().addContainerGap()
+										.addComponent(jLabel10)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(pn_lista_pacientesLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+												.addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36,
+														Short.MAX_VALUE)
+												.addComponent(tx_pesquisar))
+										.addGap(18, 18, 18)
+										.addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 354,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+				_tab.addTab("Lista de Pacientes", pn_lista_pacientes);
+
+				pn_identificacao.setPreferredSize(new java.awt.Dimension(982, 600));
+
+				jLabel1.setText("Código de Identificação");
+
+				jLabel2.setText("Nome");
+
+				tx_identificacao.setEditable(false);
+				tx_identificacao.setBackground(new java.awt.Color(255, 255, 255));
+
+				jLabel4.setText("CEP");
+
+				jLabel5.setText("Logradouro");
+
+				jLabel6.setText("Número");
+
+				jLabel7.setText("Cidade");
+
+				jLabel8.setText("Estado");
+
+				jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+				jLabel9.setText("Endereço");
+
+			} catch (Exception e) {
 			}
 
-			javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-			jPanel1.setLayout(jPanel1Layout);
-			jPanel1Layout.setHorizontalGroup(jPanel1Layout
-					.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-					.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addGroup(jPanel1Layout
-							.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-							.addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
-							.addGroup(jPanel1Layout.createSequentialGroup()
-									.addGroup(jPanel1Layout
-											.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-											.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel10)
-													.addGap(0, 0, Short.MAX_VALUE))
-											.addComponent(tx_pesquisar))
-									.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85,
-											javax.swing.GroupLayout.PREFERRED_SIZE)))
-							.addContainerGap()));
-			jPanel1Layout
-					.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-							.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addComponent(jLabel10)
-									.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-									.addGroup(jPanel1Layout
-											.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-											.addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36,
-													Short.MAX_VALUE)
-											.addComponent(tx_pesquisar))
-									.addGap(18, 18, 18)
-									.addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 354,
-											javax.swing.GroupLayout.PREFERRED_SIZE)
-									.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-
-			_tab.addTab("Lista de Pacientes", jPanel1);
-
-			pn_identificacao.setPreferredSize(new java.awt.Dimension(982, 600));
-
-			jLabel1.setText(new String("Código de Identificação".getBytes(), Charset.forName("UTF-8")));
-
-			jLabel2.setText("Nome");
-
-			tx_identificacao.setEditable(false);
-			tx_identificacao.setBackground(new java.awt.Color(255, 255, 255));
-
-			jLabel4.setText("CEP");
-
-			jLabel5.setText("Logradouro");
-
-			jLabel6.setText(new String("Número".getBytes(), Charset.forName("UTF-8")));
-
-			jLabel7.setText("Cidade");
-
-			jLabel8.setText("Estado");
-
-			jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-			jLabel9.setText(new String("Endereço".getBytes(), Charset.forName("UTF-8")));
-
-			cb_estados.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "AC", // Acre
+			cb_estados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", // Acre
 					"AL", // Alagoas
 					"AP", // Amapá
 					"AM", // Amazonas
@@ -236,7 +252,7 @@ public class Application extends javax.swing.JFrame {
 		jLabel11.setText("CPF");
 
 		rd_nao_informado.setSelected(true);
-		rd_nao_informado.setText(new String("Não Informado".getBytes(), Charset.forName("UTF-8")));
+		rd_nao_informado.setText("Não Informado");
 		rd_nao_informado.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				rd_nao_informadoActionPerformed(evt);
@@ -302,7 +318,7 @@ public class Application extends javax.swing.JFrame {
 														.addGap(0, 0, Short.MAX_VALUE))
 												.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
 														pn_identificacaoLayout.createSequentialGroup()
-																.addGap(0, 0, Short.MAX_VALUE)
+																.addGap(0, 6, Short.MAX_VALUE)
 																.addGroup(pn_identificacaoLayout.createParallelGroup(
 																		javax.swing.GroupLayout.Alignment.LEADING)
 																		.addComponent(jLabel14).addComponent(tx_bairro,
@@ -340,7 +356,7 @@ public class Application extends javax.swing.JFrame {
 																		.addComponent(jLabel2)
 																		.addGap(0, 0, Short.MAX_VALUE))))
 												.addGroup(pn_identificacaoLayout.createSequentialGroup()
-														.addGap(79, 79, 79).addComponent(jLabel13)
+														.addGap(202, 202, 202).addComponent(jLabel13)
 														.addGap(0, 0, Short.MAX_VALUE))))
 								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_identificacaoLayout
 										.createSequentialGroup().addComponent(tx_cpf)
@@ -417,7 +433,7 @@ public class Application extends javax.swing.JFrame {
 										.addComponent(tx_bairro)))
 						.addContainerGap()));
 
-		_tab.addTab(new String("Identificação".getBytes(), Charset.forName("UTF-8")), pn_identificacao);
+		_tab.addTab("Identificação", pn_identificacao);
 
 		tb_ficha_clinica.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
@@ -448,7 +464,7 @@ public class Application extends javax.swing.JFrame {
 						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
 						.addContainerGap()));
 
-		_tab.addTab(new String("Ficha Clínica".getBytes(), Charset.forName("UTF-8")), pn_ficha);
+		_tab.addTab("Ficha Clínica", pn_ficha);
 
 		tb_exames.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
@@ -485,7 +501,7 @@ public class Application extends javax.swing.JFrame {
 				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
 						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
 						{ null, null, null }, { null, null, null } },
-				new String[] { new String("Nome remédio".getBytes(), Charset.forName("UTF-8")), new String("Data início".getBytes(), Charset.forName("UTF-8")), "Data fim" }) {
+				new String[] { "Nome remédio", "Data início", "Data fim" }) {
 			Class[] types = new Class[] { java.lang.String.class, java.lang.String.class, java.lang.String.class };
 			boolean[] canEdit = new boolean[] { false, false, false };
 
@@ -511,7 +527,7 @@ public class Application extends javax.swing.JFrame {
 								.addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
 								.addContainerGap()));
 
-		_tab.addTab(new String("Prescrição Médica".getBytes(), Charset.forName("UTF-8")), jPanel4);
+		_tab.addTab("Prescrição Médica", jPanel4);
 
 		btn_cancelar.setText("Cancelar");
 		btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -573,29 +589,46 @@ public class Application extends javax.swing.JFrame {
 		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void tb_pacienteMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tb_pacienteMouseClicked
+		// TODO add your handling code here:]
+		int row = this.tb_paciente.getSelectedRow();
+		if (row != -1) {
+			Long id = Long.parseLong(this.tb_paciente.getModel().getValueAt(row, 0).toString());
+			this._tab.setSelectedIndex(1);
+			this.setFormData(id);
+		}
+	}// GEN-LAST:event_tb_pacienteMouseClicked
+
 	private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_salvarActionPerformed
 		// TODO add your handling code here:
-		Identificacao iden = new Identificacao.Builder().setNome(tx_nome.getText())
-				.setNaturalidade(tx_naturalidade.getText()).setCPF(tx_cpf.getText()).setSexo(this.sexo)
+		Identificacao iden = new Identificacao.Builder()
+				.setId(Long.parseLong(
+						!tx_identificacao.getText().isEmpty()  
+						? tx_identificacao.getText() : "0"))
+				.setNome(tx_nome.getText())
+				.setNaturalidade(tx_naturalidade.getText()).setSexo(this.sexo).setCPF(tx_cpf.getText())
 				.setEndereco(new Endereco.Builder().setLogradouro(tx_logradouro.getText())
 						.setNumero(tx_numero.getText()).setBairro(tx_bairro.getText()).setCidade(tx_cidade.getText())
-						.setEstado(cb_estados.getSelectedItem().toString()).build())
+						.setEstado(cb_estados.getSelectedItem().toString()).setCep(tx_cep.getText()).build())
 				.build();
 		try {
-			this.service.save(iden);
+			int opcao = iden.getId() == 0 ? 0 : 1;
+			
+			if (this.service.save(iden, opcao)) {
+				this.resetForm();
+				this.AtualizarTabelaPacientes();
+				this._tab.setSelectedIndex(0);
+			}
 		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Falha ao salvar", "Falha", JOptionPane.ERROR_MESSAGE);
 			Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}// GEN-LAST:event_btn_salvarActionPerformed
 
 	private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_cancelarActionPerformed
 		// TODO add your handling code here:
+		this.resetForm();
 	}// GEN-LAST:event_btn_cancelarActionPerformed
-
-	private void _tabStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event__tabStateChanged
-		// TODO add your handling code here:
-		System.out.println(this._tab.getSelectedIndex());
-	}// GEN-LAST:event__tabStateChanged
 
 	private void tx_cpfActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tx_cpfActionPerformed
 		// TODO add your handling code here:
@@ -641,21 +674,17 @@ public class Application extends javax.swing.JFrame {
 		this.rd_nao_informado.setSelected(false);
 		this.sexo = this.rd_nao_informado.getText();
 	}// GEN-LAST:event_rd_nao_informadoActionPerformed
-	
+
 	public DefaultTableModel getPacientes() {
 		List<Paciente> pacientes = this.service.getPacientes();
 		DefaultTableModel model = new DefaultTableModel(new String[] { "Codigo", "Nome", "CPF", "Sexo" }, 0);
 		if (pacientes != null) {
-			for(Paciente paciente : pacientes) {
-				model.addRow(new Object[] {
-					paciente.getId(),
-					paciente.getNome(),
-					paciente.getCpf(),
-					paciente.getSexo()
-				});
+			for (Paciente paciente : pacientes) {
+				model.addRow(
+						new Object[] { paciente.getId(), paciente.getNome(), paciente.getCpf(), paciente.getSexo() });
 			}
 		}
-		
+
 		return model;
 	}
 
@@ -706,12 +735,86 @@ public class Application extends javax.swing.JFrame {
 		return new ImageIcon(Application.class.getResource("./medical-history.png")).getImage();
 	}
 
+	private void setFormData(Long id) {
+		this.resetForm();
+		try {
+			Identificacao ident = this.service.getPaciente(id);
+			this.tx_identificacao.setText(ident.getId().toString());
+			this.tx_nome.setText(ident.getNome());
+			this.tx_cpf.setText(ident.getCpf());
+			this.tx_naturalidade.setText(ident.getNaturalidade());
+
+			switch (ident.getSexo()) {
+				case "Masculino":
+					this.rd_masculino.setSelected(true);
+					this.rd_feminino.setSelected(false);
+					this.rd_outro.setSelected(false);
+					this.rd_nao_informado.setSelected(false);
+				break;
+				
+				case "Feminino":
+					this.rd_masculino.setSelected(false);
+					this.rd_feminino.setSelected(true);
+					this.rd_outro.setSelected(false);
+					this.rd_nao_informado.setSelected(false);
+				break;
+				
+				case "Não Informado":
+					this.rd_masculino.setSelected(false);
+					this.rd_feminino.setSelected(false);
+					this.rd_outro.setSelected(false);
+					this.rd_nao_informado.setSelected(true);
+				break;
+				
+				case "Outro":
+					this.rd_masculino.setSelected(false);
+					this.rd_feminino.setSelected(false);
+					this.rd_outro.setSelected(true);
+					this.rd_nao_informado.setSelected(false);
+				break;
+					
+
+				default:
+					this.rd_masculino.setSelected(false);
+					this.rd_feminino.setSelected(false);
+					this.rd_outro.setSelected(false);
+					this.rd_nao_informado.setSelected(false);
+				break;
+			}
+			
+			this.tx_cep.setText(ident.getEndereco().getCep());
+			this.tx_logradouro.setText(ident.getEndereco().getLogradouro());
+			this.tx_numero.setText(ident.getEndereco().getNumero());
+			this.tx_bairro.setText(ident.getEndereco().getBairro());
+			this.tx_cidade.setText(ident.getEndereco().getCidade());
+			this.cb_estados.setSelectedIndex(Estados.valueOf(ident.getEndereco().getEstado()).getId());
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void resetForm() {
+		this.tx_identificacao.setText(null);
+		this.tx_nome.setText(null);
+		this.tx_naturalidade.setText(null);
+		this.tx_cpf.setText(null);
+		this.tx_cep.setText(null);
+		this.tx_logradouro.setText(null);
+		this.tx_numero.setText(null);
+		this.tx_bairro.setText(null);
+		this.tx_cidade.setText(null);
+		this.cb_estados.setSelectedIndex(24);
+	}
+
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JTabbedPane _tab;
 	private javax.swing.JButton btn_cancelar;
 	private javax.swing.JMenu btn_novo;
 	private javax.swing.JMenuItem btn_sair;
 	private javax.swing.JButton btn_salvar;
+	private javax.swing.ButtonGroup buttonGroup1;
 	private javax.swing.JComboBox<String> cb_estados;
 	private javax.swing.JButton jButton1;
 	private javax.swing.JLabel jLabel1;
@@ -730,7 +833,6 @@ public class Application extends javax.swing.JFrame {
 	private javax.swing.JMenu jMenu2;
 	private javax.swing.JMenuBar jMenuBar1;
 	private javax.swing.JMenuItem jMenuItem1;
-	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel3;
 	private javax.swing.JPanel jPanel4;
 	private javax.swing.JScrollPane jScrollPane1;
@@ -741,6 +843,7 @@ public class Application extends javax.swing.JFrame {
 	private javax.swing.JTable jTable1;
 	private javax.swing.JPanel pn_ficha;
 	private javax.swing.JPanel pn_identificacao;
+	private javax.swing.JPanel pn_lista_pacientes;
 	private javax.swing.JRadioButton rd_feminino;
 	private javax.swing.JRadioButton rd_masculino;
 	private javax.swing.JRadioButton rd_nao_informado;
